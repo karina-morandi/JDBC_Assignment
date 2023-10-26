@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-18">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Users/karina/Documents/MASE/Semester 1/Data Architecture and Database Systems/Libraries-20231011/iText-2.1.5.jar"/>
+	<classpathentry kind="lib" path="/Users/karina/Documents/MASE/Semester 1/Data Architecture and Database Systems/Libraries-20231011/jcommon-1.0.17.jar"/>
+	<classpathentry kind="lib" path="/Users/karina/Documents/MASE/Semester 1/Data Architecture and Database Systems/Libraries-20231011/jfreechart-1.0.14-demo.jar"/>
+	<classpathentry kind="lib" path="/Users/karina/Documents/MASE/Semester 1/Data Architecture and Database Systems/Libraries-20231011/jfreechart-1.0.14-experimental.jar"/>
+	<classpathentry kind="lib" path="/Users/karina/Documents/MASE/Semester 1/Data Architecture and Database Systems/Libraries-20231011/jfreechart-1.0.14.jar"/>
+	<classpathentry kind="lib" path="/Users/karina/Documents/MASE/Semester 1/Data Architecture and Database Systems/Libraries-20231011/mysql-connector-java-8.0.20.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
