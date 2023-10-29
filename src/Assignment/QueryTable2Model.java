@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.*;
 
 @SuppressWarnings("serial")
-class QueryTableModel extends AbstractTableModel
+class QueryTable2Model extends AbstractTableModel
 {
 	Vector modelData; //will hold String[] objects
 	int colCount;
@@ -19,7 +19,7 @@ class QueryTableModel extends AbstractTableModel
 	String[] record;
 	ResultSet rs = null;
 
-	public QueryTableModel(){
+	public QueryTable2Model(){
 		modelData = new Vector();
 	}//end constructor QueryTableModel
 
@@ -52,7 +52,7 @@ class QueryTableModel extends AbstractTableModel
 		stmt = stmt1;
 		try{
 			//Execute the query and store the result set and its metadata
-			rs = stmt.executeQuery("SELECT * from SmartHomeItems left join ItemPrices on SmartHomeItems.item_id = ItemPrices.item_id;");
+			rs = stmt.executeQuery("SELECT * FROM SmartHomeItems");
 			ResultSetMetaData meta = rs.getMetaData();
 		
 			//to get the number of columns

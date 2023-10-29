@@ -50,10 +50,10 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 	private JTextField gpsLatTF=new JTextField(10);
 
 			
-	private static QueryTableModel TableModel = new QueryTableModel();
+	private static QueryTable2Model Table2Model = new QueryTable2Model();
 	
 	//Add the models to JTabels
-	private JTable TableofDBContents=new JTable(TableModel);
+	private JTable Table2ofDBContents=new JTable(Table2Model);
 	
 	//Buttons for inserting, and updating members
 	//also a clear button to clear details panel
@@ -157,9 +157,9 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 		content.add(clearButton);
 
 				
-		TableofDBContents.setPreferredScrollableViewportSize(new Dimension(900, 300));
+		Table2ofDBContents.setPreferredScrollableViewportSize(new Dimension(900, 300));
 	
-		dbContentsPanel=new JScrollPane(TableofDBContents,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		dbContentsPanel=new JScrollPane(Table2ofDBContents,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		dbContentsPanel.setBackground(Color.lightGray);
 		dbContentsPanel.setBorder(BorderFactory.createTitledBorder(lineBorder,"Database Content"));
 		
@@ -174,7 +174,7 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 		setSize(982,645);
 		setVisible(true);
 	
-		TableModel.refreshFromDB(stmt);
+		Table2Model.refreshFromDB(stmt);
 	}
 	
 	public void initiate_db_conn()
@@ -184,7 +184,7 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 			// Load the JConnector Driver
 			Class.forName("com.mysql.jdbc.Driver");
 			// Specify the DB Name
-			String url="jdbc:mysql://localhost:3306/Assign";
+			String url="jdbc:mysql://localhost:3306/Assignment";
 			// Connect to DB using DB URL, Username and password
 			con = DriverManager.getConnection(url, "root", "@SQLTeemo25");
 			//Create a generic statement which is passed to the TestInternalFrame1
@@ -234,7 +234,7 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 	 		}
 	 		finally
 	 		{
-	 			TableModel.refreshFromDB(stmt);
+	 			Table2Model.refreshFromDB(stmt);
 			}
 		 }
 		 if (target == deleteButton)
@@ -252,7 +252,7 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 	 		}
 	 		finally
 	 		{
-	 			TableModel.refreshFromDB(stmt);
+	 			Table2Model.refreshFromDB(stmt);
 			}
 		 }
 		 if (target == updateButton)
@@ -288,7 +288,7 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 	 			System.err.println("Error with members insert:\n"+sqle.toString());
 	 		}
 	 		finally{
-	 			TableModel.refreshFromDB(stmt);
+	 			Table2Model.refreshFromDB(stmt);
 			}
 		 }		 	
 	}
