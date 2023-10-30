@@ -52,7 +52,7 @@ class QueryTableModel extends AbstractTableModel
 		stmt = stmt1;
 		try{
 			//Execute the query and store the result set and its metadata
-			rs = stmt.executeQuery("SELECT * from SmartHomeItems left join ItemPrices on SmartHomeItems.item_id = ItemPrices.item_id;");
+			rs = stmt.executeQuery("SELECT * from ItemPrices");
 			ResultSetMetaData meta = rs.getMetaData();
 		
 			//to get the number of columns

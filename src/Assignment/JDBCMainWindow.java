@@ -106,4 +106,3 @@ public class JDBCMainWindow extends JFrame implements ActionListener
 			
 		}
 }
-

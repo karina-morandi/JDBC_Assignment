@@ -25,31 +25,18 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 	
 	private Border lineBorder;
 	
-	private JLabel RecordIDLabel=new JLabel("Record ID:                 ");
-	private JLabel SSIDLabel=new JLabel("SSID:               ");
-	private JLabel dateLabel=new JLabel("Date:      ");
-	private JLabel RSSLabel=new JLabel("RSS:        ");
-	private JLabel macLossLabel=new JLabel("MAC Loss:                 ");
-	private JLabel delayLabel=new JLabel("Delay:               ");
-	private JLabel channelLabel=new JLabel("Channel:      ");
-	private JLabel secLabel=new JLabel("Security:      ");
-	private JLabel swLabel=new JLabel("Sw Version:        ");
-	private JLabel gpsLongLabel=new JLabel("GPS Longitude:        ");
-	private JLabel gpsLatLabel=new JLabel("GPS Latitude:        ");
+	private JLabel itemIdLabel=new JLabel("Item ID:                 ");
+	private JLabel itemNameLabel=new JLabel("Item Name:               ");
+	private JLabel manufacturerLabel=new JLabel("Manufacturer:      ");
+	private JLabel connectivityTypeLabel=new JLabel("Connectivity Type:        ");
+	private JLabel roomLabel=new JLabel("Room:                 ");
 	
-	private JTextField RecordIDTF= new JTextField(10);
-	private JTextField SSIDTF=new JTextField(10);
-	private JTextField dateTF=new JTextField(10);
-	private JTextField RSSTF=new JTextField(10);
-	private JTextField macLossTF=new JTextField(10);
-	private JTextField delayTF=new JTextField(10);
-	private JTextField channelTF=new JTextField(10);
-	private JTextField secTF=new JTextField(10);
-	private JTextField swTF=new JTextField(10);
-	private JTextField gpsLongTF=new JTextField(10);
-	private JTextField gpsLatTF=new JTextField(10);
-
-			
+	private JTextField itemIdTF= new JTextField(10);
+	private JTextField itemNameTF=new JTextField(10);
+	private JTextField manufacturerTF=new JTextField(10);
+	private JTextField connectivityTF=new JTextField(10);
+	private JTextField roomTF=new JTextField(10);
+				
 	private static QueryTable2Model Table2Model = new QueryTable2Model();
 	
 	//Add the models to JTabels
@@ -91,28 +78,16 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 		detailsPanel.setBackground(Color.lightGray);
 		detailsPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "AP Details"));
 			
-		detailsPanel.add(RecordIDLabel);			
-		detailsPanel.add(RecordIDTF);
-		detailsPanel.add(SSIDLabel);		
-		detailsPanel.add(SSIDTF);
-		detailsPanel.add(dateLabel);	
-		detailsPanel.add(dateTF);
-		detailsPanel.add(RSSLabel);		
-		detailsPanel.add(RSSTF);
-		detailsPanel.add(macLossLabel);
-		detailsPanel.add(macLossTF);
-		detailsPanel.add(delayLabel);
-		detailsPanel.add(delayTF);
-		detailsPanel.add(channelLabel);
-		detailsPanel.add(channelTF);
-		detailsPanel.add(secLabel);
-		detailsPanel.add(secTF);
-		detailsPanel.add(swLabel);
-		detailsPanel.add(swTF);
-		detailsPanel.add(gpsLongLabel);
-		detailsPanel.add(gpsLongTF);
-		detailsPanel.add(gpsLatLabel);
-		detailsPanel.add(gpsLatTF);
+		detailsPanel.add(itemIdLabel);			
+		detailsPanel.add(itemIdTF);
+		detailsPanel.add(itemNameLabel);		
+		detailsPanel.add(itemNameTF);
+		detailsPanel.add(manufacturerLabel);	
+		detailsPanel.add(manufacturerTF);
+		detailsPanel.add(connectivityTypeLabel);		
+		detailsPanel.add(connectivityTF);
+		detailsPanel.add(roomLabel);
+		detailsPanel.add(roomTF);
 		
 		//setup details panel and add the components to it
 		exportButtonPanel=new JPanel();
@@ -202,28 +177,19 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 		 Object target=e.getSource();
 		 if (target == clearButton)
 		 {
-			 RecordIDTF.setText("");
-			 SSIDTF.setText("");
-			 dateTF.setText("");
-			 RSSTF.setText("");
-			 macLossTF.setText("");
-			 delayTF.setText("");
-			 channelTF.setText("");
-			 secTF.setText("");
-			 swTF.setText("");
-			 gpsLongTF.setText("");
-			 gpsLatTF.setText("");
-			 	 
+			 itemIdTF.setText("");
+			 itemNameTF.setText("");
+			 manufacturerTF.setText("");
+			 connectivityTF.setText("");
+			 roomTF.setText("");
 		 }
 		
 		 if (target == insertButton)
 		 {		 
 	 		try
 	 		{
- 				String updateTemp ="INSERT INTO APPERFDATA VALUES ('"+
- 		 				  RecordIDTF.getText()+"','"+SSIDTF.getText()+"','"+dateTF.getText()+"','"+RSSTF.getText()+"','"+macLossTF.getText()+"','"
- 		 				 +delayTF.getText()+"','"+channelTF.getText()+"','"+secTF.getText()+"','"+swTF.getText()+"','"+gpsLongTF.getText()+"','"+gpsLatTF.getText()+"');";
- 				
+ 				String updateTemp ="INSERT INTO SmartHomeItems VALUES ('"+
+ 		 				  itemIdTF.getText()+"','"+itemNameTF.getText()+"','"+manufacturerTF.getText()+"','"+connectivityTF.getText()+"','"+roomTF.getText()+"');";
  						
  				stmt.executeUpdate(updateTemp);
  			
@@ -242,7 +208,7 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 		 	
 	 		try
 	 		{
- 				String updateTemp ="DELETE FROM APPERFDATA WHERE Rec_id = "+RecordIDTF.getText()+";"; 
+ 				String updateTemp ="DELETE FROM SmartHomeItems WHERE item_id = "+itemIdTF.getText()+";"; 
  				stmt.executeUpdate(updateTemp);
  			
 	 		}
@@ -259,28 +225,16 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 		 {	 	
 	 		try
 	 		{ 			
- 				String updateTemp ="UPDATE APPERFDATA SET SSID = '"+SSIDTF.getText()+
- 									
- 									"', Date = "+
- 									"'"+dateTF.getText()+"'"+
- 									", RSS = "+RSSTF.getText()+
- 									", MAC_Loss = "+macLossTF.getText()+
- 									", Delay = "+delayTF.getText()+
- 									", Channel = "+channelTF.getText()+
- 									", Sec = "+
- 									"'"+secTF.getText()+"'"+
- 									", Software_Version = "+swTF.getText()+
- 									", GPS_Long = "+gpsLongTF.getText()+
- 									", GPS_Lat = "+gpsLatTF.getText()+
- 									" where Rec_id = "+RecordIDTF.getText();
- 				
- 	
- 				
+ 				String updateTemp ="UPDATE SmartHomeItems SET item_name = '"+itemNameTF.getText()+
+ 									"', manufacturer = '"+manufacturerTF.getText()+
+ 									"', connectivity_type = '"+connectivityTF.getText()+
+ 									"', room_location = '"+roomTF.getText() +
+ 									"' WHERE  item_id = '"+itemIdTF.getText()+"';"; 				
  				
  				System.out.println(updateTemp);
  				stmt.executeUpdate(updateTemp);
  				//these lines do nothing but the table updates when we access the db.
- 				rs = stmt.executeQuery("SELECT * from APPERFDATA ");
+ 				rs = stmt.executeQuery("SELECT * from SmartHomeItems ");
  				rs.next();
  				rs.close();	
  			}
