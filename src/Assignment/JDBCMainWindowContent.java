@@ -25,14 +25,41 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 	
 	private Border lineBorder;
 	
-	private JLabel itemIdLabel=new JLabel("Item ID:                 ");
-	private JLabel countryLabel=new JLabel("Country:               ");
-	private JLabel priceLabel=new JLabel("Price:      ");
+	private JLabel itemIdLabel=new JLabel("Item ID: ");
+	private JLabel IrelandMinPriceLabel=new JLabel("Ireland Min:");
+	private JLabel IrelandMaxPriceLabel=new JLabel("Ireland Max:");
+	private JLabel USAMinPriceLabel=new JLabel("USA Min:");
+	private JLabel USAMaxPriceLabel=new JLabel("USA Max");
+	private JLabel UKMinPriceLabel=new JLabel("UK Min");
+	private JLabel UKMaxPriceLabel=new JLabel("UK Max");
+	private JLabel GermanyMinPriceLabel=new JLabel("Germany Min");
+	private JLabel GermanyMaxPriceLabel=new JLabel("Germany Max");
+	private JLabel JapanMinPriceLabel=new JLabel("Japan Min");
+	private JLabel JapanMaxPriceLabel=new JLabel("Japan Max");
+	private JLabel BrazilMinPriceLabel=new JLabel("Brazil Min");
+	private JLabel BrazilMaxPriceLabel=new JLabel("Brazil Max");
+	private JLabel EgyptMinPriceLabel=new JLabel("Egypt Min");
+	private JLabel EgyptMaxPriceLabel=new JLabel("Egypt Max");
+	private JLabel AustraliaMinPriceLabel=new JLabel("Australia Min");
+	private JLabel AustraliaMaxPriceLabel=new JLabel("Australia Max");
 	
 	private JTextField itemIDTF= new JTextField(10);
-	private JTextField countryTF=new JTextField(10);
-	private JTextField priceTF=new JTextField(10);
-
+	private JTextField IrelandMinPriceTF=new JTextField(10);
+	private JTextField IrelandMaxPriceTF=new JTextField(10);
+	private JTextField USAMinPriceTF=new JTextField(10);
+	private JTextField USAMaxPriceTF=new JTextField(10);
+	private JTextField UKMinPriceTF=new JTextField(10);
+	private JTextField UKMaxPriceTF=new JTextField(10);
+	private JTextField GermanyMinPriceTF=new JTextField(10);
+	private JTextField GermanyMaxPriceTF=new JTextField(10);
+	private JTextField JapanMinPriceTF=new JTextField(10);
+	private JTextField JapanMaxPriceTF=new JTextField(10);
+	private JTextField BrazilMinPriceTF=new JTextField(10);
+	private JTextField BrazilMaxPriceTF=new JTextField(10);
+	private JTextField EgyptMinPriceTF=new JTextField(10);
+	private JTextField EgyptMaxPriceTF=new JTextField(10);
+	private JTextField AustraliaMinPriceTF=new JTextField(10);
+	private JTextField AustraliaMaxPriceTF=new JTextField(10);
 			
 	private static QueryTableModel TableModel = new QueryTableModel();
 	
@@ -76,12 +103,40 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		detailsPanel.setBackground(Color.lightGray);
 		detailsPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "AP Details"));
 			
+		detailsPanel.add(IrelandMinPriceLabel);		
+		detailsPanel.add(IrelandMinPriceTF);
+		detailsPanel.add(IrelandMaxPriceLabel);	
+		detailsPanel.add(IrelandMaxPriceTF);
+		detailsPanel.add(USAMinPriceLabel);		
+		detailsPanel.add(USAMinPriceTF);
+		detailsPanel.add(USAMaxPriceLabel);	
+		detailsPanel.add(USAMaxPriceTF);
+		detailsPanel.add(UKMinPriceLabel);		
+		detailsPanel.add(UKMinPriceTF);
+		detailsPanel.add(UKMaxPriceLabel);	
+		detailsPanel.add(UKMaxPriceTF);
+		detailsPanel.add(GermanyMinPriceLabel);		
+		detailsPanel.add(GermanyMinPriceTF);
+		detailsPanel.add(GermanyMaxPriceLabel);	
+		detailsPanel.add(GermanyMaxPriceTF);
+		detailsPanel.add(JapanMinPriceLabel);		
+		detailsPanel.add(JapanMinPriceTF);
+		detailsPanel.add(JapanMaxPriceLabel);	
+		detailsPanel.add(JapanMaxPriceTF);
+		detailsPanel.add(BrazilMinPriceLabel);		
+		detailsPanel.add(BrazilMinPriceTF);
+		detailsPanel.add(BrazilMaxPriceLabel);	
+		detailsPanel.add(BrazilMaxPriceTF);
+		detailsPanel.add(EgyptMinPriceLabel);		
+		detailsPanel.add(EgyptMinPriceTF);
+		detailsPanel.add(EgyptMaxPriceLabel);	
+		detailsPanel.add(EgyptMaxPriceTF);
+		detailsPanel.add(AustraliaMinPriceLabel);		
+		detailsPanel.add(AustraliaMinPriceTF);
+		detailsPanel.add(AustraliaMaxPriceLabel);	
+		detailsPanel.add(AustraliaMaxPriceTF);
 		detailsPanel.add(itemIdLabel);			
 		detailsPanel.add(itemIDTF);
-		detailsPanel.add(countryLabel);		
-		detailsPanel.add(countryTF);
-		detailsPanel.add(priceLabel);	
-		detailsPanel.add(priceTF);
 		
 		//setup details panel and add the components to it
 		exportButtonPanel=new JPanel();
@@ -173,8 +228,22 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		 if (target == clearButton)
 		 {
 			 itemIDTF.setText("");
-			 countryTF.setText("");
-			 priceTF.setText("");
+			 IrelandMinPriceTF.setText("");
+			 IrelandMaxPriceTF.setText("");
+			 USAMinPriceTF.setText("");
+			 USAMaxPriceTF.setText("");
+			 UKMinPriceTF.setText("");
+			 UKMaxPriceTF.setText("");
+			 GermanyMinPriceTF.setText("");
+			 GermanyMaxPriceTF.setText("");
+			 JapanMinPriceTF.setText("");
+			 JapanMaxPriceTF.setText("");
+			 BrazilMinPriceTF.setText("");
+			 BrazilMaxPriceTF.setText("");
+			 EgyptMinPriceTF.setText("");
+			 EgyptMaxPriceTF.setText("");
+			 AustraliaMinPriceTF.setText("");
+			 AustraliaMaxPriceTF.setText("");
 			 	 
 		 }
 		
@@ -183,7 +252,7 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 	 		try
 	 		{
  				String updateTemp ="INSERT INTO ItemPrices VALUES ('"+
- 		 				  itemIDTF.getText()+"','"+countryTF.getText()+"','"+priceTF.getText()+"');";
+ 		 				  itemIDTF.getText()+"','"+IrelandMinPriceTF.getText()+"','"+IrelandMaxPriceTF.getText()+"','"+USAMinPriceTF.getText()+"','"+USAMaxPriceTF.getText()+"','"+UKMinPriceTF.getText()+"','"+UKMaxPriceTF.getText()+"','"+GermanyMinPriceTF.getText()+"','"+GermanyMaxPriceTF.getText()+"','"+JapanMinPriceTF.getText()+"','"+JapanMaxPriceTF.getText()+"','"+BrazilMinPriceTF.getText()+"','"+BrazilMaxPriceTF.getText()+"','"+EgyptMinPriceTF.getText()+"','"+EgyptMaxPriceTF.getText()+"','"+AustraliaMinPriceTF.getText()+"','"+AustraliaMaxPriceTF.getText()+"');";
  				
  				stmt.executeUpdate(updateTemp);
  			
@@ -219,8 +288,8 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		 {	 	
 	 		try
 	 		{ 			
- 				String updateTemp ="UPDATE ItemPrices SET price = '"+priceTF.getText()+
- 									"' WHERE item_id = '"+itemIDTF.getText()+ "' AND country = '"+countryTF.getText()+"';";
+ 				String updateTemp ="UPDATE ItemPrices SET Ireland_Min = '"+IrelandMinPriceTF.getText()+"', Ireland_Max = '"+IrelandMaxPriceTF.getText()+"', USA_Min = '"+USAMinPriceTF.getText()+"', USA_Max = '"+USAMaxPriceTF.getText()+"', UK_Min = '"+UKMinPriceTF.getText()+"', UK_Max = '"+UKMaxPriceTF.getText()+"', Germany_Min = '"+GermanyMinPriceTF.getText()+"', Germany_Max = '"+GermanyMaxPriceTF.getText()+"', Japan_Min = '"+JapanMinPriceTF.getText()+"', Japan_Max = '"+JapanMaxPriceTF.getText()+"', Brazil_Min = '"+BrazilMinPriceTF.getText()+"', Brazil_Max = '"+BrazilMaxPriceTF.getText()+"', Egypt_Min = '"+EgyptMinPriceTF.getText()+"', Egypt_Max = '"+EgyptMaxPriceTF.getText()+"', Australia_Min = '"+AustraliaMinPriceTF.getText()+"', Australia_Max = '"+AustraliaMaxPriceTF.getText()+
+ 									"' WHERE item_id = '"+itemIDTF.getText()+"';";
  				
  				System.out.println(updateTemp);
  				stmt.executeUpdate(updateTemp);

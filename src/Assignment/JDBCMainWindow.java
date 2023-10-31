@@ -26,8 +26,8 @@ public class JDBCMainWindow extends JFrame implements ActionListener
 			JMenuBar menuBar=new JMenuBar();
 			JMenu fileMenu=new JMenu("File");
 			exitItem =new JMenuItem("Exit");
-			table1Item = new JMenuItem("Table 1");
-	        table2Item = new JMenuItem("Table 2");
+			table1Item = new JMenuItem("Item Prices");
+	        table2Item = new JMenuItem("Smart Home Items");
 			
 //			jRadioButton1 = new JRadioButton();
 //			jRadioButton2 = new JRadioButton();
