@@ -10,6 +10,7 @@ public class JDBCMainWindow extends JFrame implements ActionListener
 		private JMenuItem exitItem;
 		private JMenuItem table1Item;
 	    private JMenuItem table2Item;
+	    private JMenuItem table3Item;
 //		JRadioButton jRadioButton1;
 //		JRadioButton jRadioButton2;
 //		JButton jButton;
@@ -28,6 +29,7 @@ public class JDBCMainWindow extends JFrame implements ActionListener
 			exitItem =new JMenuItem("Exit");
 			table1Item = new JMenuItem("Item Prices");
 	        table2Item = new JMenuItem("Smart Home Items");
+	        table3Item = new JMenuItem("Average Salaries");
 			
 //			jRadioButton1 = new JRadioButton();
 //			jRadioButton2 = new JRadioButton();
@@ -54,7 +56,7 @@ public class JDBCMainWindow extends JFrame implements ActionListener
 	        fileMenu.add(exitItem);
 	        fileMenu.add(table1Item);
 	        fileMenu.add(table2Item);
-	        
+	        fileMenu.add(table3Item);
 	        
 //			menuBar.add(fileMenu);
 //			setJMenuBar(menuBar);
@@ -66,7 +68,8 @@ public class JDBCMainWindow extends JFrame implements ActionListener
 			// Add a listener to the Exit Menu Item
 			exitItem.addActionListener(this);
 			table1Item.addActionListener(this);
-	        table2Item.addActionListener(this);			
+	        table2Item.addActionListener(this);	
+	        table3Item.addActionListener(this);	
 			
 //			// Create an instance of our class JDBCMainWindowContent 
 //			JDBCMainWindowContent aWindowContent = new JDBCMainWindowContent( "MSc JDBC Assignment");
@@ -125,6 +128,14 @@ public class JDBCMainWindow extends JFrame implements ActionListener
 			    getContentPane().add(bWindowContent);
 			    revalidate();
 			    repaint();// Refresh the content
+			}else if (e.getSource().equals(table3Item)) {
+			    // Create an instance of your class for Table 2
+			    JDBCThirdWindowContent cWindowContent = new JDBCThirdWindowContent("MSc JDBC Assignment");
+			    // Add the instance to the main section of the window
+			    getContentPane().removeAll();
+			    getContentPane().add(cWindowContent);
+			    revalidate();
+			    repaint();
 			}
 			
 		}
