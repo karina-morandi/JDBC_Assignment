@@ -3,8 +3,18 @@ package Assignment;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.*;
 import javax.swing.border.*;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import java.sql.*;
 
 
@@ -25,11 +35,11 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 	
 	private Border lineBorder;
 	
-	private JLabel itemIdLabel=new JLabel("Item ID:                 ");
-	private JLabel itemNameLabel=new JLabel("Item Name:               ");
-	private JLabel manufacturerLabel=new JLabel("Manufacturer:      ");
-	private JLabel connectivityTypeLabel=new JLabel("Connectivity Type:        ");
-	private JLabel roomLabel=new JLabel("Room:                 ");
+	private JLabel itemIdLabel=new JLabel("Item ID: ");
+	private JLabel itemNameLabel=new JLabel("Item Name: ");
+	private JLabel manufacturerLabel=new JLabel("Manufacturer: ");
+	private JLabel connectivityTypeLabel=new JLabel("Connectivity Type: ");
+	private JLabel roomLabel=new JLabel("Room: ");
 	
 	private JTextField itemIdTF= new JTextField(10);
 	private JTextField itemNameTF=new JTextField(10);
@@ -50,14 +60,15 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 	private JButton deleteButton  = new JButton("Delete");
 	private JButton clearButton  = new JButton("Clear");
 
-	private JButton last3LossRates  = new JButton("3 Previous Loss Rates per AP");
-	private JTextField last3LossRatesTF  = new JTextField(12);
-	private JButton avgofRSS  = new JButton("Avg Loss for last 3 Rec per AP");
-	private JTextField avgofRSSTF  = new JTextField(12);
-	private JButton overLappingAP  = new JButton("AP Location");
-	private JButton overLappingChannels  = new JButton("AP Channel");
+	private JButton fullPriceButton  = new JButton("Price of all Smart Home Items in: ");
+	private JTextField fullPriceTF  = new JTextField(12);
+	private JButton averagePricesButton  = new JButton("Average Prices for each item per country: ");
+	private JTextField averagePricesTF  = new JTextField(12);
+	private JButton salaryPercButton  = new JButton("Percentage of the salary for all items: ");
+	private JTextField salaryPercTF  = new JTextField(12);
+	private JButton salariesEuros  = new JButton("Salaries in Euros");
+	private JButton percChart  = new JButton("Chart");
 	
-
 
 	public JDBCSecondWindowContent( String aTitle)
 	{	
@@ -91,20 +102,20 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 		
 		//setup details panel and add the components to it
 		exportButtonPanel=new JPanel();
-		exportButtonPanel.setLayout(new GridLayout(3,2));
+		exportButtonPanel.setLayout(new GridLayout(4,3));
 		exportButtonPanel.setBackground(Color.lightGray);
 		exportButtonPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "Export Data"));
-		exportButtonPanel.add(last3LossRates);
-		exportButtonPanel.add(last3LossRatesTF);
-		exportButtonPanel.add(avgofRSS);
-		exportButtonPanel.add(avgofRSSTF);
-		exportButtonPanel.add(overLappingAP);
-		exportButtonPanel.add(overLappingChannels);
-		exportButtonPanel.setSize(500, 200);
-		exportButtonPanel.setLocation(3, 300);
-		content.add(exportButtonPanel);
-		
-		
+		exportButtonPanel.add(fullPriceButton);
+		exportButtonPanel.add(fullPriceTF);
+		exportButtonPanel.add(averagePricesButton);
+		exportButtonPanel.add(averagePricesTF);
+		exportButtonPanel.add(salaryPercButton);
+		exportButtonPanel.add(salaryPercTF);
+		exportButtonPanel.add(salariesEuros);
+		exportButtonPanel.add(percChart);
+		exportButtonPanel.setSize(1150, 200);
+		exportButtonPanel.setLocation(4, 300);
+		content.add(exportButtonPanel);			
 	
 		insertButton.setSize(100, 30);
 		updateButton.setSize(100, 30);
@@ -123,7 +134,12 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 		exportButton.addActionListener(this);
 		deleteButton.addActionListener(this);
 		clearButton.addActionListener(this);
-
+		fullPriceButton.addActionListener(this);
+		averagePricesButton.addActionListener(this);
+		salaryPercButton.addActionListener(this);
+		salariesEuros.addActionListener(this);
+		percChart.addActionListener(this);
+		
 		
 		content.add(insertButton);
 		content.add(updateButton);
@@ -245,7 +261,189 @@ public class JDBCSecondWindowContent extends JInternalFrame implements ActionLis
 	 			Table2Model.refreshFromDB(stmt);
 			}
 		 }		 	
+		 if(target == exportButton) {
+			 try (Statement statement = con.createStatement()) {
+				 String exportFilePath = "smartHomeItemsTable.csv";
+				 
+				 try(FileWriter writer = new FileWriter(exportFilePath)){
+					 writer.write("ItemId, ItemName, Manufacturer, ConnectivityType, RoomLocation\n");
+					 String selectQuery = "SELECT * FROM SmartHomeItems;";
+					 ResultSet resultSet = statement.executeQuery(selectQuery);
+					 
+					 while(resultSet.next()) {
+						 int item_id = resultSet.getInt("item_id");
+						 String item_name = resultSet.getString("item_name");
+						 String manufacturer = resultSet.getString("manufacturer");
+						 String connectivity = resultSet.getString("connectivity_type");
+						 String room = resultSet.getString("room_location");
+						
+						 writer.write(item_id +", " + item_name + ", " + manufacturer +", " + connectivity +", " + room + "\n");
+					 }					
+				 } catch (IOException ioException) {
+					 ioException.printStackTrace();
+			 }
+		 } catch (SQLException sqlException) {
+			 sqlException.printStackTrace();
+	 			 
+		 }
 	}
-	
+		 if (target == fullPriceButton)
+		 {
+			    String query = "SELECT SUM(("+fullPriceTF.getText()+"_Min + "+fullPriceTF.getText()+"_Max) / 2) AS Total FROM ItemPrices";
 
+		        try (Statement statement = con.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
+		            if (resultSet.next()) {
+		                // Get the result from the query
+		                double total = resultSet.getDouble("Total");
+
+		                // Specify the export file path
+		                String exportFilePath = "exported_total.csv"; // Change this to the desired file path
+
+		                try (FileWriter writer = new FileWriter(exportFilePath)) {
+		                    // Write the result to the CSV file
+		                    writer.write("Total for " + fullPriceTF.getText()+"\n");
+		                    writer.write(String.valueOf(total) + "\n");
+		                } catch (IOException ioException) {
+		                    ioException.printStackTrace();
+		                }
+		            }
+		        } catch (SQLException sqlException) {
+		            sqlException.printStackTrace();
+		        }
+			  }
+		 if(target == averagePricesButton) {
+			 String query = "CREATE TABLE "+ averagePricesTF.getText() + "Prices AS SELECT (" + averagePricesTF.getText()+"_Min + " + averagePricesTF.getText()+"_Max)/2 AS " + averagePricesTF.getText()+"Prices FROM ItemPrices;";
+			 
+			 try(Statement statement = con.createStatement()){
+				 int rowCount = statement.executeUpdate(query);
+				 
+				 if(rowCount>0) {
+				 
+				 String exportFilePath = "Country_prices.csv";
+				 
+				 try(FileWriter writer = new FileWriter(exportFilePath)){
+					 writer.write("Average prices for " + averagePricesTF.getText()+"\n");
+					 String selectQuery = "SELECT * FROM " + averagePricesTF.getText() + "Prices;";
+					 ResultSet resultSet = statement.executeQuery(selectQuery);
+					 
+					 while(resultSet.next()) {
+						 double price = resultSet.getDouble(averagePricesTF.getText() + "Prices");
+						 writer.write(String.valueOf(price)+"\n");
+					 }					
+				 } catch (IOException ioException) {
+					 ioException.printStackTrace();
+				 }
+			 }
+		 } catch (SQLException sqlException) {
+			 sqlException.printStackTrace();
+		 	}
+		 }
+		 
+		 if (target == salaryPercButton) {
+			    try (Statement statement = con.createStatement()) {
+			        // Specify the export file path
+			        String exportFilePath = "percentage.csv"; // Change this to the desired file path
+
+			        try (FileWriter writer = new FileWriter(exportFilePath)) {
+			            writer.write("Country, Salary, Total_Item_Prices, Percentage\n"); // Header
+
+			            String query = "SELECT DISTINCT country, salary AS " + salaryPercTF.getText() + "_Salary, " +
+			                    "ROUND((SELECT SUM((" + salaryPercTF.getText() + "_Min + " + salaryPercTF.getText() + "_Max) / 2) " +
+			                    "FROM ItemPrices), 2) AS Total_Item_Prices, " +
+			                    "ROUND((SELECT SUM((" + salaryPercTF.getText() + "_Min + " + salaryPercTF.getText() + "_Max) / 2) " +
+			                    "FROM ItemPrices) * 100 / salary, 2) AS Percentage FROM AverageSalary " +
+			                    "WHERE country = '" + salaryPercTF.getText() + "';";
+			            
+			            ResultSet resultSet = statement.executeQuery(query);
+			            
+			            while (resultSet.next()) {
+			                String country = resultSet.getString("country");
+			                double percentage = resultSet.getDouble("Percentage");
+			                double totalItemPrices = resultSet.getDouble("Total_Item_Prices");
+			                double salary = resultSet.getDouble(salaryPercTF.getText() + "_Salary");
+
+			                writer.write(country + "," + salary + "," + totalItemPrices + "," + percentage + "\n");
+			            }
+			        } catch (IOException ioException) {
+			            ioException.printStackTrace();
+			        }
+			    } catch (SQLException sqlException) {
+			        sqlException.printStackTrace();
+			    }
+			}
+		 
+		 if(target == salariesEuros) {
+			 try(Statement statement = con.createStatement()) {
+				 String exportFilePath = "salariesInEuros.csv";
+				 try (FileWriter writer = new FileWriter(exportFilePath)) {
+	                    // Write the result to the CSV file
+	                    writer.write("Country, Salary, Conversion to Euros, Salaries in Euros\n");
+	                    String query = "SELECT *, Round((salary * conversionToEuro),2) AS 'Salary In Euros' FROM AverageSalary;";
+	                    ResultSet resultSet = statement.executeQuery(query);
+	                    while (resultSet.next()) {
+	                    	String country = resultSet.getString("country");
+	                    	double salary = resultSet.getDouble("salary");
+	                    	double conversion = resultSet.getDouble("conversionToEuro");
+			                double salaries = resultSet.getDouble("Salary In Euros");
+			                writer.write(country + "," + salary + "," + conversion + "," + salaries + "\n");
+	                    }
+
+	              }catch (IOException ioException) {
+			            ioException.printStackTrace();
+			        }
+			    } catch (SQLException sqlException) {
+			        sqlException.printStackTrace();
+			    }
+			}
+		 if (target.equals(percChart)){
+			 try(Statement statement = con.createStatement()) {
+				String query = "SELECT A.country, ROUND((P.totalPrices * 100 / A.salary), 2) AS Percentage FROM AverageSalary A\r\n"
+						+ "JOIN (\r\n"
+						+ "    SELECT 'Ireland' AS country, SUM(Ireland) AS totalPrices FROM AveragePrices\r\n"
+						+ "    UNION ALL\r\n"
+						+ "    SELECT 'Australia' AS country,SUM(Australia) AS totalPrices FROM AveragePrices\r\n"
+						+ "    UNION ALL\r\n"
+						+ "    SELECT 'Brazil' AS country, SUM(Brazil) AS totalPrices FROM AveragePrices\r\n"
+						+ "    UNION ALL\r\n"
+						+ "    SELECT 'Egypt' AS country, SUM(Egypt) AS totalPrices FROM AveragePrices\r\n"
+						+ "    UNION ALL\r\n"
+						+ "    SELECT 'Germany' AS country, SUM(Germany) AS totalPrices FROM AveragePrices\r\n"
+						+ "    UNION ALL\r\n"
+						+ "    SELECT 'Japan' AS country, SUM(Japan) AS totalPrices FROM AveragePrices\r\n"
+						+ "    UNION ALL\r\n"
+						+ "    SELECT 'UK' AS country, SUM(UK) AS totalPrices FROM AveragePrices\r\n"
+						+ "    UNION ALL\r\n"
+						+ "    SELECT 'USA' AS country, SUM(USA) AS totalPrices FROM AveragePrices\r\n"
+						+ ") P\r\n"
+						+ "ON A.country = P.country;";
+				ResultSet resultSet = statement.executeQuery(query);
+				DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+	            while (resultSet.next()) {
+	                String country = resultSet.getString("country");
+	                double percentage = resultSet.getDouble("Percentage");
+	                dataset.addValue(percentage, "Percentage", country);
+	            }
+
+	            JFreeChart chart = ChartFactory.createBarChart(
+	                    "Percentage of Cost of all Items in relation to Salaries by Country",
+	                    "Country",
+	                    "Percentage ",
+	                    dataset,
+	                    PlotOrientation.VERTICAL,
+	                    true,
+	                    true,
+	                    false
+	            );
+
+	            ChartFrame frame = new ChartFrame("Percentage of Cost of all Items in relation to Salaries by Country", chart);
+	            chart.setBackgroundPaint(Color.WHITE);
+	            frame.pack();
+	            frame.setVisible(true);
+	        } catch (SQLException sqlException) {
+	            sqlException.printStackTrace();
+	        }		
+			}
+
+		 }
 }
+

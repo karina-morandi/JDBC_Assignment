@@ -1,0 +1,25 @@
+ItemId, ItemName, Manufacturer, ConnectivityType, RoomLocation
+1, Smart Thermostat, Nest, Wi-Fi, Living Room
+2, Smart Light Bulb, Philips Hue, Wi-Fi, Bedroom
+3, Security Camera, Ring, Wi-Fi, Front Door
+4, Digital Door Lock, August, Bluetooth, Front Door
+5, Traditional Ceiling Fan, Hunter, null, Living Room
+6, Smart Plug, TP-Link, Wi-Fi, Kitchen
+7, Smart Speaker, Amazon, Wi-Fi, Living Room
+8, Smart Coffee Maker, Keurig, Wi-Fi, Kitchen
+9, Smart TV, Samsung, Wi-Fi, Living Room
+10, Smart Garage Door Opener, Chamberlain, Wi-Fi, Garage
+11, Smart Smoke Detector, First Alert, Wi-Fi, Bedroom
+12, Smart Refrigerator, LG, Wi-Fi, Kitchen
+13, Smart Window Blinds, Somfy, Z-Wave, Living Room
+14, Smart Vacuum Cleaner, iRobot, Wi-Fi, Living Room
+15, Smart Sprinkler System, Rachio, Wi-Fi, Garden
+16, Smart Microwave, Samsung, Wi-Fi, Kitchen
+17, Smart Fitness Tracker, Fitbit, Bluetooth, Bedroom
+18, Smart Lawn Mower, Husqvarna, Wi-Fi, Garden
+19, Smart Humidifier, Dyson, Wi-Fi, Bedroom
+20, Smart Pet Feeder, PetSafe, Wi-Fi, Living Room
+21, Smart Water Heater, EcoSmart, Wi-Fi, Bathroom
+22, Smart Air Purifier, Dyson, Wi-Fi, Living Room
+23, Smart Baby Monitor, Nanit, Wi-Fi, Nursery
+24, Smart Pet Camera, Furbo, Wi-Fi, Living Room
