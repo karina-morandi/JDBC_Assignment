@@ -3,7 +3,7 @@ ItemId, ItemName, Manufacturer, ConnectivityType, RoomLocation
 2, Smart Light Bulb, Philips Hue, Wi-Fi, Bedroom
 3, Security Camera, Ring, Wi-Fi, Front Door
 4, Digital Door Lock, August, Bluetooth, Front Door
-5, Traditional Ceiling Fan, Hunter, null, Living Room
+5, Traditional Ceiling Fan, Hunter, Wi-Fi, Living Room
 6, Smart Plug, TP-Link, Wi-Fi, Kitchen
 7, Smart Speaker, Amazon, Wi-Fi, Living Room
 8, Smart Coffee Maker, Keurig, Wi-Fi, Kitchen
@@ -23,3 +23,18 @@ ItemId, ItemName, Manufacturer, ConnectivityType, RoomLocation
 22, Smart Air Purifier, Dyson, Wi-Fi, Living Room
 23, Smart Baby Monitor, Nanit, Wi-Fi, Nursery
 24, Smart Pet Camera, Furbo, Wi-Fi, Living Room
+,,,,
+,,,,
+,,,,
+, Wi-Fi,21,,
+, Bluetooth,2,,
+, Z-Wave,1,,
+,,,,
+, Living Room,9,,
+, Bedroom,4,,
+, Front Door,2,,
+, Kitchen,4,,
+, Garage,1,,
+, Garden,2,,
+, Bathroom,1,,
+, Nursery,1,,
