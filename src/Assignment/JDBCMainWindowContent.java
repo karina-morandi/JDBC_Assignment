@@ -92,7 +92,7 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 	private JButton salaryPercButton  = new JButton("Percentage of the salary for all items: ");
 	private JTextField salaryPercTF  = new JTextField(12);
 	private JButton salariesEuros  = new JButton("Salaries in Euros");
-	private JButton percChart  = new JButton("Chart");
+	private JButton percChart  = new JButton("Percentage of Cost for all Items in relation to the Salary per Country");
 	
 
 
